@@ -48,7 +48,7 @@ const text_to_ia = async function (text, req) {
                     obj.pdf_page = req.body.data.pdf_page;
                     obj.prontuarios = req.body.data.prontuarios;
                     obj.pdf = text;
-                    obj.filename = req.body.data.filename;;
+                    obj.filename = req.body.data.filename;
 
                 }
 

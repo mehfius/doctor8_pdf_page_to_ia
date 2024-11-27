@@ -6,17 +6,18 @@ const get_pdf_page = async function (req) {
 
     try {
 
-        let json = req.body.data;
+        let json = req.body.data;  
 
-        let { data, error } = await supabase
-        .from('exames')
-        .select('pdf')
-        .match({ 
-            pdf_page: json.pdf_page,
-            filename: json.filename
-         })    
-
-        
+        let param = {
+            data: {
+                pdf_page: json.pdf_page,
+                filename: json.filename,
+                prontuarios: json.prontuarios,
+                session: json.session
+            }
+        };
+    
+        let { data, error } = await supabase.rpc('get_pdf_page', param);
 
         return data[0].pdf;
 

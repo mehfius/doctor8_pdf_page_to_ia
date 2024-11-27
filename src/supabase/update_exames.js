@@ -9,18 +9,19 @@ const update_exames = async function (array) {
         const results = [];       
 
         if (array.length > 0) {
-            await supabase
+             await supabase
             .from('exames')
             .delete()
-            .match({ filename: array[0].filename, page: array[0].page })
+            .match({ filename: array[0].filename, pdf_page: array[0].pdf_page })
+          
         }
       
         for (const item of array) {            
-          
+         
             const { data, error } = await supabase
                 .from('exames')
                 .insert(item)   
-
+     
             if (error) {
                 console.error(`Erro ao atualizar exames ${item.filename}:`, error);
                 throw new Error(`Falha ao atualizar exames ${item.filename}`);
@@ -28,6 +29,7 @@ const update_exames = async function (array) {
                 console.log(`Registro na tabela [exames] atualizado com sucesso.`,`${item.filename} `);
                 results.push(data);
             }
+
         }
 
         return results;

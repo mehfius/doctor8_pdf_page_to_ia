@@ -6,11 +6,11 @@ const get_prompt = async function () {
     try {
 
         let { data, error} = await supabase
-        .from('suites_config')
-        .select('url')
-        .eq('label', 'prompt_text_to_ia');
-
-        return data[0].url;
+        .from('prompt')
+        .select('v')
+        .eq('string', 'prompt_text_to_ia');
+        
+        return data[0].v;
 
     } catch (error) {
 
